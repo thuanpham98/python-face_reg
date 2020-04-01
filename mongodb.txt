@@ -1,0 +1,26 @@
+# from pymongo import MongoClient
+# client = MongoClient('mongodb://localhost:27017/')
+# mydb=client['iot_core_te']
+
+# import calendar
+# import time
+
+# import json
+
+# User=mydb.user
+# Data=mydb.data
+# History=mydb.history
+# CMD=mydb.command
+
+# frame_data={"email":"pmttmp24@gmail.com","timestamp":calendar.timegm(time.gmtime())}
+
+# User.insert_one(frame_data)
+
+# frame_data={"email":"pmttmp24@gmail.com","timestamp":calendar.timegm(time.gmtime())}
+
+# User.insert_one(frame_data)
+
+# results = User.find({"email":"pmttmp24@gmail.com"}).sort([('_id', -1)]).limit(1) # 1 for older
+
+# for result in results:
+#     print(result["_id"])
