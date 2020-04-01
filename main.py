@@ -2,11 +2,11 @@ import numpy as np
 import cv2 
 import pickle
 
-face_cas=cv2.CascadeClassifier('src/cascades/data/haarcascade_frontalface_alt2.xml')
+face_cas=cv2.CascadeClassifier('src/cascades/data/haarcascade_frontalface_default.xml')
 recognizer = cv2.face.LBPHFaceRecognizer_create()
-recognizer.read("trainner.yml")
+recognizer.read("train/trainner-face.yml")
 
-labels={"thuan":0}
+labels={"persion":5}
 with open("pickle/labels.pickle",'rb') as f:
     og_labels=pickle.load(f)
     labels={v:k for k,v in og_labels.items()}
@@ -18,7 +18,7 @@ while(True):
     #capture video frame
     ret,frame =cap.read()
     gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-    faces = face_cas.detectMultiScale(gray, scaleFactor =1.3,minNeighbors=3)
+    faces = face_cas.detectMultiScale(gray, scaleFactor =1.05,minNeighbors=3)
     for(x,y,w,h) in faces:
         # print(x,y,w,h)
 
@@ -28,9 +28,9 @@ while(True):
 
         #regonizer 
         id_,conf = recognizer.predict(roi_gray)
-        # print(id_)
+        print(id_)
         print(conf)
-        if conf>=30 :
+        if conf>=50 :
             print(id_)
             print(labels[id_])
             font=cv2.FONT_HERSHEY_SIMPLEX
@@ -41,10 +41,10 @@ while(True):
             cv2.putText(frame,name,(x,y),font,size,color,strole,cv2.LINE_AA)
 
         #import file picture
-        img_item1 = "images/" + str(1) + ".png"
-        img_item2 = "images/my2.png"
-        cv2.imwrite(img_item1,roi_gray)
-        cv2.imwrite(img_item2,roi_color)
+        # img_item1 = "images/" + str(1) + ".png"
+        # img_item2 = "images/my2.png"
+        # cv2.imwrite(img_item1,roi_gray)
+        # cv2.imwrite(img_item2,roi_color)
 
         #draw rectangle around face 
         color = (255,0,0)
